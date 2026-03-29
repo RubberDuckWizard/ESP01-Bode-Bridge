@@ -291,9 +291,4 @@ The current implementation targets the later FY6900 Hz-format variant.
 
 ## Repository Notes
 
-This repository is prepared for source publication:
-- sensitive WiFi defaults have been sanitized
-- generated build output is ignored through `.gitignore`
-- local backup files used during development are also ignored
-
 The project remains focused on the validated SDS824X HD + FY6900 path while keeping the diagnostic variants available for further compatibility work.
