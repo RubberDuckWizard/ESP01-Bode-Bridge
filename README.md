@@ -281,6 +281,28 @@ Frequency format note:
 
 The current implementation targets the later FY6900 Hz-format variant.
 
+
+## Example Bode Plot Result
+
+![Example Bode plot result](docs/images/bode-plot-demo.png)
+
+The screenshot below shows a successful Bode Plot acquisition using the ESP bridge with a Siglent SDS800X-HD oscilloscope and an FY-series generator.
+
+In this example, the measured response stays close to `0 dB` and `0°` across the sweep range, which is consistent with a direct reference-style path or a near-unity transfer path during bench validation. The result confirms that:
+- the oscilloscope can establish the expected LAN/VXI-11 control session through the ESP bridge
+- the generator can be driven correctly during the sweep
+- amplitude and phase data are returned coherently to the oscilloscope Bode Plot function
+
+For the validated bench setup, generator `CH1` is split with a BNC `T` connector, one branch goes directly to oscilloscope `CH2` as reference, and the other branch passes through the DUT to oscilloscope `CH1`. Both oscilloscope inputs use external `50 Ω` to `1 MΩ` adapter/termination arrangements because the `SDS800X-HD` does not provide native `50 Ω` inputs.
+
+## References And Acknowledgements
+
+This project was developed with useful reference and inspiration from the following repositories:
+- [4x1md/sds1004x_bode](https://github.com/4x1md/sds1004x_bode)
+- [sq6sfo/espBode](https://github.com/sq6sfo/espBode)
+
+Those projects helped clarify the expected oscilloscope-side Bode workflow and related implementation ideas. This repository adapts the concept to the ESP-01 / ESP8266 platform and the FeelTech / FeelElec FY-series generator use case.
+
 ## Troubleshooting And Safety Notes
 
 - Use only a 3.3 V USB-to-UART adapter for flashing.
@@ -290,5 +312,10 @@ The current implementation targets the later FY6900 Hz-format variant.
 - If needed, reset to defaults with `/reset` and re-enter the network configuration through AP mode.
 
 ## Repository Notes
+
+This repository is prepared for source publication:
+- sensitive WiFi defaults have been sanitized
+- generated build output is ignored through `.gitignore`
+- local backup files used during development are also ignored
 
 The project remains focused on the validated SDS824X HD + FY6900 path while keeping the diagnostic variants available for further compatibility work.
