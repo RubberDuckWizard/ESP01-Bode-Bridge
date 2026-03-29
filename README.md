@@ -115,7 +115,6 @@ Fixed behavior to be aware of:
 
 Factory reset note:
 - `/reset` restores the compile-time defaults and reboots
-- because the public defaults do not contain usable WiFi credentials, a reset returns the device to AP-based setup mode
 
 ## Diagnostic Firmware Variants
 
