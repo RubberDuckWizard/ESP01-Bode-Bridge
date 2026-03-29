@@ -27,7 +27,7 @@ Validated reference setup:
 - ESP-01 / ESP8266EX with 1 MB flash
 
 Expected but not fully verified:
-- other Siglent SDS800X-HD family models
+- other Siglent oscilloscope models
 - FeelTech / FeelElec FY6600, FY6800, and FY6900 units using compatible TTL command formats
 
 Generator compatibility outside the validated FY6900 setup should be treated as expected rather than guaranteed, especially for older FY firmware revisions.
