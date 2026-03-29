@@ -48,7 +48,7 @@ ESP bridge side:
 AWG side:
 - UART0 TTL serial transport
 - waveform, frequency, amplitude, offset, phase, and output control
-- current implementation verified against later FY frequency formatting
+- current implementation verified against later FY6900 frequency formatting
 
 ## Features
 
@@ -61,13 +61,6 @@ AWG side:
 - alternating VXI service ports to reduce reconnect issues
 - protocol diagnostics in the dedicated diagnostic firmware variant
 - UART console diagnostics in dedicated bench firmware variants
-
-
-## Example Bode Plot Result
-
-![Example Bode plot result](docs/images/bode-plot-demo.png)
-
-*Example capture from the validated setup. The oscilloscope successfully completes the Bode Plot workflow through the ESP-01 bridge, with the FY-series generator controlled over WiFi/VXI-11 on the scope side and TTL serial on the generator side. The near-flat response shown here is a practical communication and measurement sanity check for the bridge path.*
 
 ## WiFi Setup And First Boot Behavior
 
@@ -228,6 +221,25 @@ Bench diagnosis:
 2. Use `esp01_diag_uart0` when you need an interactive UART console.
 3. Use `esp01_diag_wifi` when WiFi initialization itself is under investigation.
 
+
+## Test Wiring And Execution
+
+Validated bench wiring for the Bode measurement:
+
+1. Use generator `CH1` as the test source.
+2. Connect generator `CH1` to a BNC `T` connector.
+3. From the `T` connector, run two `50 Ω` coaxial cables:
+   - one cable directly to oscilloscope `CH2` as the reference signal
+   - the other cable through the circuit under test, then to oscilloscope `CH1`
+4. Because the `SDS800X-HD` does not provide native `50 Ω` input termination, connect both oscilloscope channels through external `50 Ω` to `1 MΩ` adapter/termination arrangements.
+
+Test execution notes:
+- generator `CH2` should be disabled during the test to keep the signal path as clean as possible
+- the test signal is enabled automatically while the measurement is running
+- after the measurement is stopped, the test signal is turned off approximately one minute later
+
+This wiring allows the oscilloscope to compare the direct reference path on `CH2` with the DUT response on `CH1` during the Bode sweep.
+
 ## SCPI And Protocol Notes
 
 Implemented command set includes:
@@ -264,7 +276,7 @@ Frequency format note:
 
 | Generator firmware family | Frequency format example for 1 kHz |
 |---|---|
-| older FY6800 / older FY6600 | `WMF00001000000000` |
+| older FY6800 / older FY6900 | `WMF00001000000000` |
 | later FY6900 | `WMF000001000.000000` |
 
 The current implementation targets the later FY6900 Hz-format variant.
@@ -276,13 +288,6 @@ The current implementation targets the later FY6900 Hz-format variant.
 - If the scope cannot connect, check that the ESP and scope are on the same network and inspect the diagnostic build.
 - If the AWG does not respond, confirm `115200` baud and verify the generator's serial firmware expectations.
 - If needed, reset to defaults with `/reset` and re-enter the network configuration through AP mode.
-
-
-## Acknowledgements And Reference Repositories
-
-This project was developed with reference to the following repositories:
-- [4x1md/sds1004x_bode](https://github.com/4x1md/sds1004x_bode)
-- [sq6sfo/espBode](https://github.com/sq6sfo/espBode)
 
 ## Repository Notes
 
