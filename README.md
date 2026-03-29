@@ -276,10 +276,10 @@ Frequency format note:
 
 | Generator firmware family | Frequency format example for 1 kHz |
 |---|---|
-| older FY6800 / older FY6900 | `WMF00001000000000` |
+| older FY6600 / FY6800 | `WMF00001000000000` |
 | later FY6900 | `WMF000001000.000000` |
 
-The current implementation targets the later FY6900 Hz-format variant.
+The current implementation targets the later FY6900 -format variant.
 
 
 ## Example Bode Plot Result
