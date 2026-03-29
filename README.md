@@ -62,6 +62,13 @@ AWG side:
 - protocol diagnostics in the dedicated diagnostic firmware variant
 - UART console diagnostics in dedicated bench firmware variants
 
+
+## Example Bode Plot Result
+
+![Example Bode plot result](docs/images/bode-plot-demo.png)
+
+*Example capture from the validated setup. The oscilloscope successfully completes the Bode Plot workflow through the ESP-01 bridge, with the FY-series generator controlled over WiFi/VXI-11 on the scope side and TTL serial on the generator side. The near-flat response shown here is a practical communication and measurement sanity check for the bridge path.*
+
 ## WiFi Setup And First Boot Behavior
 
 The public default configuration is intentionally sanitized and does not contain a preloaded WiFi SSID or password.
@@ -269,6 +276,13 @@ The current implementation targets the later FY6900 Hz-format variant.
 - If the scope cannot connect, check that the ESP and scope are on the same network and inspect the diagnostic build.
 - If the AWG does not respond, confirm `115200` baud and verify the generator's serial firmware expectations.
 - If needed, reset to defaults with `/reset` and re-enter the network configuration through AP mode.
+
+
+## Acknowledgements And Reference Repositories
+
+This project was developed with reference to the following repositories:
+- [4x1md/sds1004x_bode](https://github.com/4x1md/sds1004x_bode)
+- [sq6sfo/espBode](https://github.com/sq6sfo/espBode)
 
 ## Repository Notes
 
