@@ -141,6 +141,19 @@ Diagnostic variants:
 Additional note:
 - the raw `/diag` page for ad-hoc AWG command testing exists only when building with an extra `DEBUG_BUILD` define, not in the standard published PlatformIO targets
 
+## Prebuilt Firmware
+
+Prebuilt firmware binaries are published as GitHub Release assets instead of being kept in the repository tree.
+
+Download the current binaries from:
+- [GitHub Releases](https://github.com/RubberDuckWizard/ESP01-Bode-Bridge/releases)
+
+Current published asset names:
+- `firmware_release.bin`
+- `firmware_diag_protocol.bin`
+- `firmware_diag_uart0.bin`
+- `firmware_diag_wifi.bin`
+
 ## Build Instructions
 
 Prerequisites:
@@ -199,11 +212,12 @@ platformio run -e esp01_diag_protocol -t upload --upload-port <PORT>
 Flash with esptool:
 
 ```bash
-python -m esptool --chip esp8266 --port <PORT> --baud 115200 --before default_reset --after hard_reset write_flash 0x0 .pio/build/esp01_release/firmware.bin
-python -m esptool --chip esp8266 --port <PORT> --baud 115200 --before default_reset --after hard_reset write_flash 0x0 .pio/build/esp01_diag_protocol/firmware.bin
+python -m esptool --chip esp8266 --port <PORT> --baud 115200 --before default_reset --after hard_reset write_flash 0x0 firmware_release.bin
+python -m esptool --chip esp8266 --port <PORT> --baud 115200 --before default_reset --after hard_reset write_flash 0x0 firmware_diag_protocol.bin
 ```
 
 Replace `<PORT>` with the serial port provided by the USB-to-UART adapter.
+If you are using prebuilt firmware, download the matching `.bin` file from GitHub Releases before running `esptool`.
 
 ## Basic Usage And Bench Setup
 
