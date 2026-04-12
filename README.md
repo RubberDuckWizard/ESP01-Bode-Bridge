@@ -324,11 +324,5 @@ Those projects helped clarify the expected oscilloscope-side Bode workflow and r
 - If the AWG does not respond, confirm `115200` baud and verify the generator's serial firmware expectations.
 - If needed, reset to defaults with `/reset` and re-enter the network configuration through AP mode.
 
-## Repository Notes
-
-This repository is prepared for source publication:
-- sensitive WiFi defaults have been sanitized
-- generated build output is ignored through `.gitignore`
-- local backup files used during development are also ignored
 
 The project remains focused on the validated SDS824X HD + FY6900 path while keeping the diagnostic variants available for further compatibility work.
